@@ -1,7 +1,7 @@
 import pygame, sys
 
 class Car(pygame.sprite.Sprite):
-    def __init__(self, w, h):
+    def __init__(self):
         super().__init__()
         # duplicate the image to avoid losing resolution
         # when rotating it (pygame issues)
@@ -15,6 +15,10 @@ clock = pygame.time.Clock()
 
 bg_track = pygame.image.load('Track.png')
 
+car = Car()
+cars = pygame.sprite.GroupSingle()
+cars.add(car)
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -22,5 +26,6 @@ while True:
             sys.exit()
 
     screen.blit(bg_track, (0,0))
+    cars.draw(screen)
     pygame.display.update()
     clock.tick(120)
