@@ -8,6 +8,9 @@ class Car(pygame.sprite.Sprite):
         self.original_image = pygame.image.load('Audi.png')
         self.image = self.original_image
         self.rect = self.image.get_rect(center = (640, 360))
+        self.angle = 0
+        self.rotation_speed = 1.8
+        self.direction = None
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
@@ -15,9 +18,7 @@ clock = pygame.time.Clock()
 
 bg_track = pygame.image.load('Track.png')
 
-car = Car()
-cars = pygame.sprite.GroupSingle()
-cars.add(car)
+car = pygame.sprite.GroupSingle(Car())
 
 while True:
     for event in pygame.event.get():
@@ -26,6 +27,6 @@ while True:
             sys.exit()
 
     screen.blit(bg_track, (0,0))
-    cars.draw(screen)
+    car.draw(screen)
     pygame.display.update()
     clock.tick(120)
